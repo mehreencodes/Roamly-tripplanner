@@ -4,7 +4,7 @@
 
 Roamly is a travel planning web app. It combines destination discovery with a trip workspace where you can build a day-by-day itinerary that checks itself for problems, see the trip on a map, and keep the budget in one place.
 
-**Live demo:** _add your deployed link here_
+**Live demo:** https://roamly-tripplanner-x5mn-ten.vercel.app/
 
 ## Features
 
