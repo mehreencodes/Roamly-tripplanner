@@ -10,6 +10,7 @@ import {
   MapPin,
   Plus,
   Trash2,
+  Wallet
 } from 'lucide-react'
 import SmartImage from '@/components/ui/SmartImage'
 import ActivityCard from '@/features/trips/ActivityCard'
@@ -153,6 +154,12 @@ const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null
       <div className="relative mt-5 h-52 overflow-hidden rounded-3xl bg-forest-dark text-white sm:h-60">
         <SmartImage src={dest.image} alt={dest.name} className="absolute inset-0 h-full w-full" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30" />
+        <Link
+  to={`/trips/${trip.id}/budget`}
+  className="absolute right-16 top-4 flex h-10 items-center gap-2 rounded-full bg-white/15 px-4 text-sm font-medium backdrop-blur-md transition hover:bg-white/25 active:scale-95"
+>
+  <Wallet size={16} /> Budget
+</Link>
         <button
           type="button"
           onClick={handleDelete}

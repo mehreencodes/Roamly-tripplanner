@@ -12,6 +12,7 @@ import ProfilePage from '@/pages/ProfilePage'
 import TripsPage from '@/pages/TripsPage'
 import TripPlannerPage from '@/pages/TripPlannerPage'
 import TripDetailPage from '@/pages/TripDetailPage'
+import TripBudgetPage from '@/pages/TripBudgetPage'
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
               <Route path="/trips" element={<TripsPage />} />
               <Route path="/trips/new" element={<TripPlannerPage />} />
               <Route path="/trips/:id" element={<TripDetailPage />} />
+              <Route path="/trips/:id/budget" element={<TripBudgetPage />} />
             </Route>
           </Route>
         </Routes>
