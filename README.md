@@ -2,82 +2,146 @@
 
 **Plan together. Travel better.**
 
-Roamly is a travel planner that combines destination discovery with a trip workspace: build a day-by-day itinerary that checks itself for clashes, see your trip on a map, and keep the budget in one place.
+Roamly is a travel planning web app. It combines destination discovery with a trip workspace where you can build a day-by-day itinerary that checks itself for problems, see the trip on a map, and keep the budget in one place.
 
-**Live demo:** _add your Vercel link here_
-
-![Home](docs/screenshots/home.png)
-![Trip planner](docs/screenshots/trip.png)
+**Live demo:** _add your deployed link here_
 
 ## Features
 
-- **Discover:** image-rich destinations with search and category filters, detail pages with photo gallery and map, and a personal list of saved places
-- **Trip planner:** create a trip, plan day by day, add attractions or your own activities, set start times and durations
-- **Schedule checker:** finds overlaps, tight gaps between places, overloaded days and activities without a time, and suggests fixes you can apply or dismiss
-- **Trip readiness score:** a score based on real trip data (season, empty days, missing times, open clashes)
-- **Trip map:** your activities as numbered markers
-- **Budget:** per-trip currency, estimated vs actual costs by category, remaining budget and over-budget warnings
-- **Accounts:** email and Google sign-in, profile with photo upload
+**Discover**
+- Destinations with search and category filters
+- Detail pages with a photo gallery, highlights and a map of places to visit
+- Saved places, kept per user
 
-## Engineering highlights
+**Plan**
+- Create a trip with a destination, start date and length
+- Add attractions or your own activities to each day
+- Set a start time and duration for every activity
+- Reorder activities within a day
+- Season check that warns when trip dates fall outside the best months
+- Trip map with numbered markers
 
-- **Schedule engine as pure functions.** All clash detection lives in `scheduleEngine.ts`, with no React in it, and is covered by unit tests.
-- **Honest distances.** Travel time between places is estimated from straight-line distance and is labelled as an estimate, not a route.
-- **Money as integers.** Amounts are stored in minor units (paisa, cents) and parsed from text without floating point, so `1.15` is exactly `115`. Rounding and over-budget logic are unit tested.
-- **Per-user data.** Trips and saved places are scoped to the signed-in user.
+**Schedule checker**
+- Detects overlapping activities
+- Flags tight gaps between places, using an estimated travel time
+- Flags overloaded days and activities without a start time
+- Suggests a fix for each problem, which can be applied or dismissed
+
+**Trip readiness**
+- A score based on real trip data: season, empty days, missing times and open schedule problems
+
+**Budget**
+- Currency chosen per trip
+- Estimated and actual cost for each expense, grouped by category
+- Remaining budget, spending status and over-budget warnings
+
+**Accounts**
+- Email and Google sign-in
+- Profile page with photo upload and travel preferences
+
+## Design decisions
+
+- **Schedule logic is pure.** Clash detection lives in `scheduleEngine.ts` and has no React code in it, so it is easy to test and reuse.
+- **Distances are estimates.** Travel time is derived from straight-line distance and is always presented as an estimate. It is not routing data.
+- **Money is stored as integers.** Amounts are kept in minor units (paisa, cents) and parsed from text without floating point arithmetic, so `1.15` is stored as exactly `115`. Invalid or over-precise input is rejected instead of silently rounded.
+- **Data is scoped to the user.** Trips, budgets and saved places belong to the signed-in account.
 
 ## Tech stack
 
-React, TypeScript, Vite, Tailwind CSS, React Router, Framer Motion, React Hook Form + Zod, Zustand, Leaflet (OpenStreetMap), Firebase Authentication, Cloudinary (photo upload), Vitest.
+| Area | Tools |
+|---|---|
+| Framework | React, TypeScript, Vite |
+| Styling and motion | Tailwind CSS, Framer Motion |
+| Routing and forms | React Router, React Hook Form, Zod |
+| State | Zustand, `useSyncExternalStore` stores |
+| Maps | Leaflet, OpenStreetMap |
+| Auth | Firebase Authentication |
+| Media | Cloudinary (profile photos) |
+| Testing | Vitest |
 
 ## Getting started
+
+### Prerequisites
+
+- Node.js 20 or newer
+- A Firebase project with the **Email/Password** and **Google** sign-in providers enabled
+- A Cloudinary account with an **unsigned upload preset** (used for profile photos)
+
+### Install and run
 
 ```bash
 npm install
 npm run dev
 ```
 
+### Environment variables
+
 Create a `.env.local` file in the project root:
 
-```
-VITE_FIREBASE_API_KEY=
-VITE_FIREBASE_AUTH_DOMAIN=
-VITE_FIREBASE_PROJECT_ID=
-VITE_FIREBASE_STORAGE_BUCKET=
-VITE_FIREBASE_MESSAGING_SENDER_ID=
-VITE_FIREBASE_APP_ID=
-VITE_CLOUDINARY_CLOUD_NAME=
-VITE_CLOUDINARY_UPLOAD_PRESET=
-```
+| Variable | Description |
+|---|---|
+| `VITE_FIREBASE_API_KEY` | Firebase web API key |
+| `VITE_FIREBASE_AUTH_DOMAIN` | Firebase auth domain |
+| `VITE_FIREBASE_PROJECT_ID` | Firebase project id |
+| `VITE_FIREBASE_STORAGE_BUCKET` | Firebase storage bucket |
+| `VITE_FIREBASE_MESSAGING_SENDER_ID` | Firebase messaging sender id |
+| `VITE_FIREBASE_APP_ID` | Firebase app id |
+| `VITE_CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name |
+| `VITE_CLOUDINARY_UPLOAD_PRESET` | Name of the unsigned upload preset |
 
-Other scripts:
+### Scripts
 
-```bash
-npm test        # unit tests
-npm run build   # type check and production build
-```
+| Command | What it does |
+|---|---|
+| `npm run dev` | Start the development server |
+| `npm test` | Run the unit tests |
+| `npm run build` | Type-check and create a production build |
+| `npm run preview` | Preview the production build locally |
 
 ## Project structure
 
 ```
 src/
-  components/   shared UI (layout, SmartImage)
-  features/     auth, discover, home, saved, trips, budget
-  lib/          money, geo, formatting helpers
-  pages/        route-level pages
-  types/        shared TypeScript types
+  components/   Shared UI: layout, navbar, image component
+  data/         Destination and image data
+  features/
+    auth/       Sign-in, profile storage, auth context
+    budget/     Budget math, store, expense form, overview
+    discover/   Destination cards, gallery, map
+    home/       Hero and featured destinations
+    saved/      Saved places
+    trips/      Trip store, schedule engine, readiness, itinerary UI
+  lib/          Money, geo and formatting helpers
+  pages/        Route-level pages
+  types/        Shared TypeScript types
 ```
+
+## Testing
+
+Unit tests cover the parts of the app where correctness matters most: the schedule engine, distance calculation, money parsing and formatting, and budget calculations.
+
+```bash
+npm test
+```
+
+## Deployment
+
+The app is a static Vite build and deploys to Vercel without extra configuration beyond:
+
+- the environment variables listed above, set in the Vercel project settings
+- the included `vercel.json`, which rewrites all routes to `index.html` so deep links and refreshes work
+- the deployed domain added to **Authentication, Settings, Authorized domains** in the Firebase console
 
 ## Roadmap
 
-- Backend with Express and MongoDB, so data is stored on a server
+- Backend with Express and MongoDB so data is stored on a server
 - Trip members with roles (owner, editor, contributor, viewer) enforced on the server
 - Shared expenses with splits and settlements
-- Read-only share links
-- Drag and drop ordering
+- Read-only share links for trips
+- Drag and drop ordering of activities
 
-Trips and budgets are currently stored in the browser until the backend is added.
+Until the backend exists, trips and budgets are stored in the browser.
 
 ## Credits
 
-Photos from [Unsplash](https://unsplash.com). Map data from OpenStreetMap contributors.
+Photos from [Unsplash](https://unsplash.com). Map data from [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors.
