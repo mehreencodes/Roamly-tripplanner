@@ -15,7 +15,16 @@ import { useSaved } from '@/features/saved/useSaved'
 import { destinations } from '@/data/destinations'
 import { formatDuration } from '@/lib/format'
 
-const featured = destinations.slice(0, 5)
+/* Yahan jo naam likhoge wohi section mein dikhengi. Naam destinations ke "name" se bilkul match hone chahiye. */
+const FEATURED_NAMES = ['Kyoto', 'Santorini', 'Dubai', 'Bali', 'Hunza Valley']
+
+const picked = FEATURED_NAMES.flatMap((name) => {
+  const found = destinations.find((d) => d.name === name)
+  return found ? [found] : []
+})
+
+// Agar koi naam match na ho to pehli 5 destinations dikha do, section khali na rahe
+const featured = picked.length >= 3 ? picked : destinations.slice(0, 5)
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 
 export default function FeaturedDestinations() {

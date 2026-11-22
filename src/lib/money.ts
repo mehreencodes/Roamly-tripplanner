@@ -6,6 +6,16 @@ export const CURRENCIES = {
   AED: { digits: 2, name: 'UAE dirham' },
   JPY: { digits: 0, name: 'Japanese yen' },
   IDR: { digits: 0, name: 'Indonesian rupiah' },
+    THB: { digits: 2, name: 'Thai baht' },
+  TRY: { digits: 2, name: 'Turkish lira' },
+  CHF: { digits: 2, name: 'Swiss franc' },
+  MYR: { digits: 2, name: 'Malaysian ringgit' },
+  SGD: { digits: 2, name: 'Singapore dollar' },
+  INR: { digits: 2, name: 'Indian rupee' },
+  EGP: { digits: 2, name: 'Egyptian pound' },
+  MVR: { digits: 2, name: 'Maldivian rufiyaa' },
+  CAD: { digits: 2, name: 'Canadian dollar' },
+  AUD: { digits: 2, name: 'Australian dollar' },
 } as const
 
 export type CurrencyCode = keyof typeof CURRENCIES

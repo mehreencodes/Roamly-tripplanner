@@ -12,6 +12,7 @@ import { useTrips } from '@/features/trips/tripStore'
 import { addDays, dateRange, findDestination, fmtDay } from '@/features/trips/tripUtils'
 import { formatMoney, isCurrencyCode, type CurrencyCode } from '@/lib/money'
 import type { Expense } from '@/types/budget'
+import { currencyForCountry } from '@/lib/countryCurrency'
 
 interface EditingState {
   expense: Expense
@@ -53,9 +54,11 @@ export default function TripBudgetPage() {
   }
 
   const dest = findDestination(trip.destinationSlug)
+  // Pehle destination ke mulk ki currency, phir profile ki pasand, warna PKR
   const savedCurrency = getProfile(user.uid)?.currency
   const defaultCurrency: CurrencyCode =
-    savedCurrency && isCurrencyCode(savedCurrency) ? savedCurrency : 'PKR'
+    currencyForCountry(dest?.country) ??
+    (savedCurrency && isCurrencyCode(savedCurrency) ? savedCurrency : 'PKR')
 
   const dayOptions = trip.days.map((_, i) => ({
     value: i,

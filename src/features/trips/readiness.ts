@@ -1,9 +1,12 @@
+import { summarizeBudget } from '@/features/budget/budgetMath'
+import { formatMoney } from '@/lib/money'
+import type { TripBudget } from '@/types/budget'
 import type { Destination } from '@/types/destination'
 import type { Trip } from '@/types/trip'
 import { seasonCheck } from './tripUtils'
 
 export interface ReadinessItem {
-  id: 'season' | 'planned' | 'timed' | 'conflicts'
+  id: 'season' | 'planned' | 'timed' | 'conflicts' | 'budget'
   label: string
   points: number
   max: number
@@ -16,8 +19,72 @@ export interface ReadinessItem {
 const PER_ISSUE = 7
 const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`
 
-/** openIssues: checker ke woh issues jo dismiss nahi hue */
-export function tripReadiness(trip: Trip, dest: Destination, openIssues: { day: number }[]) {
+function budgetItem(budget: TripBudget | null | undefined): ReadinessItem {
+  const max = 20
+
+  if (!budget) {
+    return {
+      id: 'budget',
+      label: 'Budget',
+      max,
+      points: 0,
+      ok: false,
+      note: 'No budget yet. Set a total to track spending.',
+    }
+  }
+
+  const summary = summarizeBudget(budget)
+
+  if (summary.totalMinor === null) {
+    return {
+      id: 'budget',
+      label: 'Budget',
+      max,
+      points: 6,
+      ok: false,
+      note: 'Budget started, but no total is set.',
+    }
+  }
+
+  if (budget.expenses.length === 0) {
+    return {
+      id: 'budget',
+      label: 'Budget',
+      max,
+      points: 12,
+      ok: false,
+      note: 'Total set. Add expenses to track spending.',
+    }
+  }
+
+  if (summary.status === 'over') {
+    return {
+      id: 'budget',
+      label: 'Budget',
+      max,
+      points: 12,
+      ok: false,
+      note: `Over budget by ${formatMoney(Math.abs(summary.remainingMinor ?? 0), budget.currency)}.`,
+    }
+  }
+
+  return {
+    id: 'budget',
+    label: 'Budget',
+    max,
+    points: max,
+    ok: true,
+    note: `${formatMoney(summary.remainingMinor ?? 0, budget.currency)} left of ${formatMoney(summary.totalMinor, budget.currency)}.`,
+  }
+}
+
+/** openIssues: checker ke woh issues jo dismiss nahi hue. budget: is trip ka budget (na ho to null) */
+export function tripReadiness(
+  trip: Trip,
+  dest: Destination,
+  openIssues: { day: number }[],
+  budget?: TripBudget | null,
+) {
   const total = trip.days.length
   const activities = trip.days.flat()
   const hasActivities = activities.length > 0
@@ -34,8 +101,8 @@ export function tripReadiness(trip: Trip, dest: Destination, openIssues: { day: 
     {
       id: 'season',
       label: 'Season',
-      max: 20,
-      points: Math.round((20 * (total - season.outside)) / total),
+      max: 15,
+      points: Math.round((15 * (total - season.outside)) / total),
       ok: season.outside === 0,
       note:
         season.outside === 0
@@ -47,8 +114,8 @@ export function tripReadiness(trip: Trip, dest: Destination, openIssues: { day: 
     {
       id: 'planned',
       label: 'Days planned',
-      max: 25,
-      points: Math.round((25 * filled) / total),
+      max: 20,
+      points: Math.round((20 * filled) / total),
       ok: emptyDays.length === 0,
       note:
         emptyDays.length === 0
@@ -59,10 +126,10 @@ export function tripReadiness(trip: Trip, dest: Destination, openIssues: { day: 
     {
       id: 'timed',
       label: 'Times set',
-      max: 20,
+      max: 15,
       points: !hasActivities
         ? 0
-        : Math.round((20 * (activities.length - untimed.length)) / activities.length),
+        : Math.round((15 * (activities.length - untimed.length)) / activities.length),
       ok: hasActivities && untimed.length === 0,
       note: !hasActivities
         ? 'Add activities to set their times.'
@@ -74,8 +141,8 @@ export function tripReadiness(trip: Trip, dest: Destination, openIssues: { day: 
     {
       id: 'conflicts',
       label: 'Schedule conflicts',
-      max: 35,
-      points: !hasActivities ? 0 : Math.max(0, 35 - PER_ISSUE * openIssues.length),
+      max: 30,
+      points: !hasActivities ? 0 : Math.max(0, 30 - PER_ISSUE * openIssues.length),
       ok: hasActivities && openIssues.length === 0,
       note: !hasActivities
         ? 'Nothing to check yet.'
@@ -84,6 +151,7 @@ export function tripReadiness(trip: Trip, dest: Destination, openIssues: { day: 
           : `${plural(openIssues.length, 'open issue')} to review.`,
       day: openIssues[0]?.day,
     },
+    budgetItem(budget),
   ]
 
   const score = items.reduce((n, i) => n + i.points, 0)
