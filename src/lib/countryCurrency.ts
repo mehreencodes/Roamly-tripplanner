@@ -50,6 +50,9 @@ const BY_COUNTRY: Partial<Record<string, CurrencyCode>> = {
   'united states of america': 'USD',
   usa: 'USD',
   us: 'USD',
+    'south africa': 'ZAR',
+  peru: 'PEN',
+  'new zealand': 'NZD',
 }
 
 /** Mulk ke naam se uski currency. Na mile to null (phir profile ki currency istemal hoti hai) */

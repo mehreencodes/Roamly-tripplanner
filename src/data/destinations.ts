@@ -1,8 +1,8 @@
 import type { Destination } from '@/types/destination'
 
-// /images/gallery/<slug>/1.jpg, 2.jpg ... (jitni photos rakho utna count do, 0 se 6)
+// /images/gallery/<slug>/1.webp, 2.webp ... (jitni photos rakho utna count do, 0 se 6)
 const gallery = (slug: string, count = 3) =>
-  Array.from({ length: count }, (_, i) => `/images/gallery/${slug}/${i + 1}.jpg`)
+  Array.from({ length: count }, (_, i) => `/images/gallery/${slug}/${i + 1}.webp`)
 
 export const destinations: Destination[] = [
   {
@@ -14,7 +14,7 @@ export const destinations: Destination[] = [
     tagline: 'Apricot blossoms under giant peaks',
     description:
       'A high mountain valley in Gilgit-Baltistan, surrounded by Karakoram peaks. Hunza is known for old forts, terraced orchards and some of the most dramatic road journeys in the country. Spring brings blossom, autumn turns the valley gold.',
-    image: '/images/destinations/hunza-valley.jpg',
+    image: '/images/destinations/hunza-valley.webp',
     gallery: gallery('hunza-valley'),
     highlights: [
       'Karakoram views from almost every village',
@@ -62,7 +62,7 @@ export const destinations: Destination[] = [
     tagline: 'Green meadows and rivers',
     description:
       'Forests, rivers and hill towns in Khyber Pakhtunkhwa, often compared to the Alps. Swat also holds Buddhist heritage from the Gandhara period, so a trip can mix nature with history.',
-    image: '/images/destinations/swat-valley.jpg',
+    image: '/images/destinations/swat-valley.webp',
     gallery: gallery('swat-valley'),
     highlights: [
       'Pine forests and river-side towns',
@@ -109,7 +109,7 @@ export const destinations: Destination[] = [
     tagline: 'Gateway to the high Karakoram',
     description:
       'Skardu is the starting point for treks to K2 base camp and the base for lakes, cold deserts and high plateaus. Distances here are long, so planning each day carefully matters.',
-    image: '/images/destinations/skardu.jpg',
+    image: '/images/destinations/skardu.webp',
     gallery: gallery('skardu'),
     highlights: [
       'Starting point for major Karakoram treks',
@@ -156,7 +156,7 @@ export const destinations: Destination[] = [
     tagline: 'Mughal heritage and street food',
     description:
       'A historic city with Mughal-era forts, mosques and old gates, and one of the best food scenes in South Asia. Most of the main sights sit close together in the walled city.',
-    image: '/images/destinations/lahore.jpg',
+    image: '/images/destinations/lahore.webp',
     gallery: gallery('lahore'),
     highlights: [
       'Mughal architecture within walking distance',
@@ -203,7 +203,7 @@ export const destinations: Destination[] = [
     tagline: 'White villages above the sea',
     description:
       'A volcanic island in the Aegean, famous for sunsets, cliffside towns and blue-domed churches. Villages sit on the rim of the caldera, with beaches on the other side of the island.',
-    image: '/images/destinations/santorini.jpg',
+    image: '/images/destinations/santorini.webp',
     gallery: gallery('santorini'),
     highlights: [
       'Sunsets over the caldera',
@@ -250,7 +250,7 @@ export const destinations: Destination[] = [
     tagline: 'Temples, gardens and tradition',
     description:
       'Japan’s old capital, with thousands of temples, shrines and traditional streets. Sights are spread across the city, so grouping them by area saves a lot of travel time.',
-    image: '/images/destinations/kyoto.jpg',
+    image: '/images/destinations/kyoto.webp',
     gallery: gallery('kyoto'),
     highlights: [
       'Temples and shrines in every district',
@@ -296,7 +296,7 @@ export const destinations: Destination[] = [
     tagline: 'Art, cafés and river walks',
     description:
       'France’s capital is easy to explore on foot, with major museums, tree-lined boulevards and neighbourhoods that each feel different. Spring and early autumn are the most comfortable times to visit.',
-    image: '/images/destinations/paris.jpg',
+    image: '/images/destinations/paris.webp',
     gallery: gallery('paris', 0),
     highlights: ['World-class museums', 'Walkable river and old quarters', 'Café and bakery culture'],
     attractions: [
@@ -338,7 +338,7 @@ export const destinations: Destination[] = [
     tagline: 'Ancient ruins on every corner',
     description:
       'A city where Roman ruins, Renaissance churches and busy piazzas sit side by side. Most sights are in the centre, but queues are long in summer, so go early.',
-    image: '/images/destinations/rome.jpg',
+    image: '/images/destinations/rome.webp',
     gallery: gallery('rome', 0),
     highlights: ['Roman ruins in the city centre', 'Vatican art and architecture', 'Piazzas and Italian food'],
     attractions: [
@@ -380,7 +380,7 @@ export const destinations: Destination[] = [
     tagline: 'Where two continents meet',
     description:
       'A city split by the Bosphorus, with Byzantine and Ottoman landmarks, busy bazaars and ferry rides between Europe and Asia. The old city sights are close together.',
-    image: '/images/destinations/istanbul.jpg',
+    image: '/images/destinations/istanbul.webp',
     gallery: gallery('istanbul', 0),
     highlights: ['Byzantine and Ottoman landmarks', 'Bosphorus ferry rides', 'Bazaars and street food'],
     attractions: [
@@ -422,7 +422,7 @@ export const destinations: Destination[] = [
     tagline: 'Skyscrapers and desert dunes',
     description:
       'A modern city of record-breaking towers, large malls and beaches, with old trading districts and desert trips close by. Summers are extremely hot, so winter is the best time.',
-    image: '/images/destinations/dubai.jpg',
+    image: '/images/destinations/dubai.webp',
     gallery: gallery('dubai', 0),
     highlights: ['Skyline and observation decks', 'Old Dubai creek district', 'Desert safaris'],
     attractions: [
@@ -464,7 +464,7 @@ export const destinations: Destination[] = [
     tagline: 'Rice terraces and sea temples',
     description:
       'An Indonesian island known for temples, green rice terraces, surf beaches and a strong craft culture. The dry season is the most reliable for beaches and sunsets.',
-    image: '/images/destinations/bali.jpg',
+    image: '/images/destinations/bali.webp',
     gallery: gallery('bali', 0),
     highlights: ['Cliff and sea temples', 'Rice terraces around Ubud', 'Surf and sunset beaches'],
     attractions: [
@@ -506,7 +506,7 @@ export const destinations: Destination[] = [
     tagline: 'Neon streets and quiet shrines',
     description:
       'A huge city with excellent public transport, where old shrines sit between modern towers. Group sights by district to save time on trains.',
-    image: '/images/destinations/tokyo.jpg',
+    image: '/images/destinations/tokyo.webp',
     gallery: gallery('tokyo', 0),
     highlights: ['Easy, fast public transport', 'Shrines next to skyscrapers', 'Food in every district'],
     attractions: [
@@ -548,7 +548,7 @@ export const destinations: Destination[] = [
     tagline: 'The city that never slows down',
     description:
       'Five boroughs of skyline views, museums, parks and food from everywhere. Manhattan sights are spread out, so plan by neighbourhood and use the subway.',
-    image: '/images/destinations/new-york.jpg',
+    image: '/images/destinations/new-york.webp',
     gallery: gallery('new-york', 0),
     highlights: ['Skyline and bridge views', 'Large parks and museums', 'Food from around the world'],
     attractions: [
@@ -590,7 +590,7 @@ export const destinations: Destination[] = [
     tagline: 'Temples, markets and river life',
     description:
       'A busy river city with gilded temples, floating and night markets and some of the best street food in Asia. It is hot all year, so plan outdoor sights for the morning.',
-    image: '/images/destinations/bangkok.jpg',
+    image: '/images/destinations/bangkok.webp',
     gallery: gallery('bangkok', 0),
     highlights: ['Grand temples along the river', 'Street food everywhere', 'Large weekend markets'],
     attractions: [
@@ -632,7 +632,7 @@ export const destinations: Destination[] = [
     tagline: 'Mountain, ocean and vineyards',
     description:
       'A coastal city under Table Mountain, with beaches, penguin colonies, wine regions and dramatic coastal drives. Summer is warm and dry, and the best time for the outdoors.',
-    image: '/images/destinations/cape-town.jpg',
+    image: '/images/destinations/cape-town.webp',
     gallery: gallery('cape-town', 0),
     highlights: ['Table Mountain views', 'Coastal drives and beaches', 'Penguins and wine regions'],
     attractions: [
@@ -674,7 +674,7 @@ export const destinations: Destination[] = [
     tagline: 'Alpine lakes and snow peaks',
     description:
       'A small town between two lakes and the base for trips into the Bernese Alps: cable cars, glaciers, lakeside villages and trains that climb the mountains.',
-    image: '/images/destinations/interlaken.jpg',
+    image: '/images/destinations/interlaken.webp',
     gallery: gallery('interlaken', 0),
     highlights: ['Mountain railways and cable cars', 'Two alpine lakes', 'Glacier and peak views'],
     attractions: [
@@ -716,7 +716,7 @@ export const destinations: Destination[] = [
     tagline: 'An Inca city in the clouds',
     description:
       'A 15th-century Inca site high in the Andes. Cusco is the usual base, and tickets, trains and altitude all need planning ahead. The dry season is the safest for clear views.',
-    image: '/images/destinations/machu-picchu.jpg',
+    image: '/images/destinations/machu-picchu.webp',
     gallery: gallery('machu-picchu', 0),
     highlights: ['Inca ruins in the mountains', 'Cusco’s old streets', 'Andean landscapes'],
     attractions: [
@@ -758,7 +758,7 @@ export const destinations: Destination[] = [
     tagline: 'Alpine lakes in the Himalayas',
     description:
       'A green valley in Khyber Pakhtunkhwa with glacier-fed rivers, high lakes and a mountain pass road. The road is usually open only in summer, so check conditions before travelling.',
-    image: '/images/destinations/naran-kaghan.jpg',
+    image: '/images/destinations/naran-kaghan.webp',
     gallery: gallery('naran-kaghan', 0),
     highlights: ['Lake Saif-ul-Malook', 'High mountain lakes and passes', 'Cool summer weather'],
     attractions: [
@@ -801,7 +801,7 @@ export const destinations: Destination[] = [
   tagline: 'Colourful villages above the Mediterranean',
   description:
     'A beautiful stretch of coastline in southern Italy, known for colourful cliffside villages, scenic coastal roads and clear blue waters. Towns like Positano and Amalfi offer charming streets, beaches and unforgettable sea views.',
-  image: '/images/destinations/amalfi-coast.jpg',
+  image: '/images/destinations/amalfi-coast.webp',
   gallery: gallery('amalfi-coast', 0),
   highlights: [
     'Colourful villages along dramatic cliffs',
@@ -847,7 +847,7 @@ export const destinations: Destination[] = [
   tagline: 'Adventure beside a crystal-clear lake',
   description:
     'A scenic resort town on the shores of Lake Wakatipu, surrounded by the Southern Alps. Queenstown is famous for adventure sports, mountain scenery, beautiful walking trails and relaxing lakeside experiences.',
-  image: '/images/destinations/queenstown.jpg',
+  image: '/images/destinations/queenstown.webp',
   gallery: gallery('queenstown', 0),
   highlights: [
     'Adventure activities and outdoor sports',

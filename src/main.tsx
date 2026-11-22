@@ -1,10 +1,20 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
+import ConfigError from './components/ConfigError'
+import { missingFirebaseKeys } from './lib/firebaseEnv'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const root = createRoot(document.getElementById('root')!)
+
+if (missingFirebaseKeys.length > 0) {
+  root.render(<ConfigError missing={missingFirebaseKeys} />)
+} else {
+  // App tabhi load hoti hai jab keys maujood hon, warna firebase.ts import par hi crash karta hai
+  import('./App.tsx').then(({ default: App }) => {
+    root.render(
+      <StrictMode>
+        <App />
+      </StrictMode>,
+    )
+  })
+}

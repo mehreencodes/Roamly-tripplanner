@@ -16,6 +16,9 @@ export const CURRENCIES = {
   MVR: { digits: 2, name: 'Maldivian rufiyaa' },
   CAD: { digits: 2, name: 'Canadian dollar' },
   AUD: { digits: 2, name: 'Australian dollar' },
+    ZAR: { digits: 2, name: 'South African rand' },
+  PEN: { digits: 2, name: 'Peruvian sol' },
+  NZD: { digits: 2, name: 'New Zealand dollar' },
 } as const
 
 export type CurrencyCode = keyof typeof CURRENCIES

@@ -6,6 +6,9 @@ describe('currencyForCountry', () => {
     expect(currencyForCountry('Japan')).toBe('JPY')
     expect(currencyForCountry('Pakistan')).toBe('PKR')
     expect(currencyForCountry('Greece')).toBe('EUR')
+        expect(currencyForCountry('South Africa')).toBe('ZAR')
+    expect(currencyForCountry('Peru')).toBe('PEN')
+    expect(currencyForCountry('New Zealand')).toBe('NZD')
   })
 
   it('handles spelling variants and spacing', () => {

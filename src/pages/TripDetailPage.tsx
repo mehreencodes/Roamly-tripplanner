@@ -33,6 +33,7 @@ import SchedulePanel from '@/features/trips/SchedulePanel'
 import { analyzeTrip, type Issue } from '@/features/trips/scheduleEngine'
 import TripReadiness from '@/features/trips/TripReadiness'
 import { tripReadiness } from '@/features/trips/readiness'
+import { useBudget } from '@/features/budget/budgetStore'
 import CustomActivityForm from '@/features/trips/CustomActivityForm'    
       import TripMap from '@/features/trips/TripMap' 
 
@@ -82,6 +83,7 @@ export default function TripDetailPage() {
   const navigate = useNavigate()
   const { user, loading } = useAuth()
   const trips = useTrips()
+    const budget = useBudget(id)
   const [activeDay, setActiveDay] = useState(0)
   const [activeView, setActiveView] = useState<'itinerary' | 'map'>('itinerary')
 const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null)
@@ -123,7 +125,7 @@ const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null
   const dismissed = trip.dismissedIssues ?? []
   const issues = allIssues.filter((i) => !dismissed.includes(i.key))
   const dismissedCount = allIssues.length - issues.length
-  const readiness = tripReadiness(trip, dest, issues)
+    const readiness = tripReadiness(trip, dest, issues, budget)
 
   const applyFix = (issue: Issue) => {
     const fix = issue.fix
