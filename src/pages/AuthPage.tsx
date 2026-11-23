@@ -6,6 +6,7 @@ import { authImage } from '@/data/images'
 import { useAuth } from '@/features/auth/authContext'
 import AuthForm, { type AuthMode } from '@/features/auth/AuthForm'
 import { getProfile } from '@/features/auth/profileStorage'
+import usePageTitle from '@/lib/usePageTitle'
 
 const points = [
   { icon: CalendarCheck, text: 'Day-by-day itineraries that flag clashes' },
@@ -17,6 +18,7 @@ export default function AuthPage() {
   const { user, loading } = useAuth()
   const [params, setParams] = useSearchParams()
   const mode: AuthMode = params.get('mode') === 'signup' ? 'signup' : 'login'
+usePageTitle(mode === 'signup' ? 'Create your account · Roamly' : 'Sign in · Roamly')
 
   if (!loading && user) {
   return <Navigate to={getProfile(user.uid) ? '/explore' : '/welcome'} replace />

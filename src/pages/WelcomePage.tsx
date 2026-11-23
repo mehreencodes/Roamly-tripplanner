@@ -5,6 +5,7 @@ import { Check } from 'lucide-react'
 import Logo from '@/components/layout/Logo'
 import { useAuth } from '@/features/auth/authContext'
 import { saveProfile } from '@/features/auth/profileStorage'
+import usePageTitle from '@/lib/usePageTitle'
 
 const styles = ['Mountains', 'Beaches', 'History', 'Adventure', 'Nature', 'Culture', 'Cities', 'Food']
 
@@ -23,6 +24,7 @@ export default function WelcomePage() {
   const [picked, setPicked] = useState<string[]>([])
   const [who, setWho] = useState('')
   const [currency, setCurrency] = useState('PKR')
+usePageTitle('Welcome · Roamly')
 
   if (loading) return <div className="min-h-screen bg-cream" />
   if (!user) return <Navigate to="/auth" replace />
