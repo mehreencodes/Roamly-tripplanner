@@ -154,13 +154,15 @@ const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null
 
     
       {/* Banner */}
-      <div className="relative mt-5 flex min-h-52 flex-col justify-end overflow-hidden rounded-3xl bg-forest-dark text-white sm:min-h-60">
-        <SmartImage src={dest.image} alt={dest.name} className="absolute inset-0 h-full w-full" />
+      <div className="relative mt-4 flex min-h-36 flex-col justify-end overflow-hidden rounded-3xl bg-forest-dark text-white sm:mt-5 sm:min-h-60">
+        <div className="absolute inset-0">
+  <SmartImage src={dest.image} alt={dest.name} className="h-full w-full" />
+</div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30" />
 
         <Link
           to={`/trips/${trip.id}/budget`}
-          className="absolute right-16 top-4 flex h-10 items-center gap-2 rounded-full bg-white/15 px-4 text-sm font-medium backdrop-blur-md transition hover:bg-white/25 active:scale-95"
+          className="absolute right-16 top-4 z-10 flex h-10 items-center gap-2 rounded-full bg-white/15 px-4 text-sm font-medium backdrop-blur-md transition hover:bg-white/25 active:scale-95"
         >
           <Wallet size={16} /> Budget
         </Link>
@@ -168,19 +170,19 @@ const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null
           type="button"
           onClick={handleDelete}
           aria-label="Delete trip"
-          className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 backdrop-blur-md transition hover:bg-red-500/80 active:scale-90"
+          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 backdrop-blur-md transition hover:bg-red-500/80 active:scale-90"
         >
           <Trash2 size={17} />
         </button>
 
-        <div className="relative p-6 pt-20 sm:p-8 sm:pt-16">
+        <div className="relative px-5 pb-4 pt-14 sm:p-8">
           <p className="flex items-center gap-1.5 text-xs uppercase tracking-widest text-white/80">
             <MapPin size={13} className="shrink-0" />
             <span className="min-w-0">
               {dest.name}, {dest.country}
             </span>
           </p>
-          <h1 className="mt-1.5 font-display text-3xl leading-tight sm:text-5xl">{trip.title}</h1>
+          <h1 className="mt-1 font-display text-2xl leading-tight sm:mt-1.5 sm:text-5xl">{trip.title}</h1>
           <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-white/80">
             <span className="flex items-center gap-1.5">
               <CalendarDays size={14} /> {dateRange(trip)}
