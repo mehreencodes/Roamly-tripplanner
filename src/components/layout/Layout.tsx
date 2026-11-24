@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from './Navbar'
 import { findDestination } from '@/features/trips/tripUtils'
 import usePageTitle from '@/lib/usePageTitle'
+import Footer from './Footer'
 
 const SITE = 'Roamly'
 
@@ -38,6 +39,7 @@ export default function Layout() {
       <main className={`flex-1 ${flushHero ? '' : 'pt-24'}`}>
         <Outlet />
       </main>
+       <Footer />
     </div>
   )
 }

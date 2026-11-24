@@ -52,9 +52,9 @@ export default function Hero() {
         />
       </svg>
 
-      <div className="relative mx-auto grid min-h-[100svh] max-w-7xl items-center gap-14 px-6 pb-20 pt-28 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
+<div className="relative mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 items-center gap-14 px-6 pb-20 pt-28 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-10">
         {/* LEFT: text + search */}
-        <motion.div variants={container} initial="hidden" animate="show">
+        <motion.div variants={container} initial="hidden" animate="show" className="min-w-0">
           <motion.p
             variants={item}
             className="flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-white/70"
@@ -65,7 +65,7 @@ export default function Hero() {
 
           <motion.h1
             variants={item}
-            className="mt-6 font-display text-5xl leading-[1.02] tracking-tight sm:text-6xl xl:text-7xl"
+            className="mt-6 font-display text-[2.6rem] leading-[1.05] tracking-tight sm:text-6xl xl:text-7xl"
           >
             Plan the trip,
             <br />
@@ -95,7 +95,7 @@ export default function Hero() {
             />
             <button
               type="submit"
-              className="rounded-full bg-forest px-6 py-3 font-medium text-white transition hover:bg-forest-dark active:scale-95"
+              className="rounded-full bg-forest px-5 py-3 font-medium text-white transition hover:bg-forest-dark active:scale-95 sm:px-6"
             >
               Explore
             </button>

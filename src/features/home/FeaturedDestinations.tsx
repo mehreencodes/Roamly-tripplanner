@@ -81,7 +81,7 @@ export default function FeaturedDestinations() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-12 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14"
+        className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14"
       >
         {/* LEFT: numbered list (sirf badi screen par) */}
         <ul className="hidden border-t border-sand lg:block">
@@ -133,8 +133,8 @@ export default function FeaturedDestinations() {
           })}
         </ul>
 
-        {/* RIGHT: chips (mobile) + preview card */}
-        <div>
+       {/* RIGHT: chips (mobile) + preview card */}
+<div className="min-w-0">
           <div className="-mx-6 flex gap-2 overflow-x-auto px-6 pb-1 [scrollbar-width:none] lg:hidden [&::-webkit-scrollbar]:hidden">
             {featured.map((d, i) => (
               <button

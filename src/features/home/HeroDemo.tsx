@@ -418,7 +418,7 @@ export default function HeroDemo() {
             ? { duration: 0.8 }
             : { duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1.4 },
         }}
-        className="relative mt-4 w-full rounded-2xl bg-cream p-4 text-ink shadow-2xl shadow-black/40 ring-1 ring-white/20 lg:absolute lg:-bottom-9 lg:-left-12 lg:mt-0 lg:w-56"
+        className="relative mt-4 w-full rounded-2xl bg-cream p-4 text-ink shadow-2xl shadow-black/40 ring-1 ring-white/20 lg:ml-10 lg:w-56"
       >
         <div className="flex items-center justify-between gap-2">
           <p className="flex items-center gap-1.5 text-xs uppercase tracking-widest text-muted">
