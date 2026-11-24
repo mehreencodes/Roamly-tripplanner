@@ -152,16 +152,18 @@ const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null
         <ArrowLeft size={16} /> My trips
       </Link>
 
+    
       {/* Banner */}
-      <div className="relative mt-5 h-52 overflow-hidden rounded-3xl bg-forest-dark text-white sm:h-60">
+      <div className="relative mt-5 flex min-h-52 flex-col justify-end overflow-hidden rounded-3xl bg-forest-dark text-white sm:min-h-60">
         <SmartImage src={dest.image} alt={dest.name} className="absolute inset-0 h-full w-full" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30" />
+
         <Link
-  to={`/trips/${trip.id}/budget`}
-  className="absolute right-16 top-4 flex h-10 items-center gap-2 rounded-full bg-white/15 px-4 text-sm font-medium backdrop-blur-md transition hover:bg-white/25 active:scale-95"
->
-  <Wallet size={16} /> Budget
-</Link>
+          to={`/trips/${trip.id}/budget`}
+          className="absolute right-16 top-4 flex h-10 items-center gap-2 rounded-full bg-white/15 px-4 text-sm font-medium backdrop-blur-md transition hover:bg-white/25 active:scale-95"
+        >
+          <Wallet size={16} /> Budget
+        </Link>
         <button
           type="button"
           onClick={handleDelete}
@@ -170,12 +172,16 @@ const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null
         >
           <Trash2 size={17} />
         </button>
-        <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+
+        <div className="relative p-6 pt-20 sm:p-8 sm:pt-16">
           <p className="flex items-center gap-1.5 text-xs uppercase tracking-widest text-white/80">
-            <MapPin size={13} /> {dest.name}, {dest.country}
+            <MapPin size={13} className="shrink-0" />
+            <span className="min-w-0">
+              {dest.name}, {dest.country}
+            </span>
           </p>
           <h1 className="mt-1.5 font-display text-3xl leading-tight sm:text-5xl">{trip.title}</h1>
-          <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-white/80">
+          <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-white/80">
             <span className="flex items-center gap-1.5">
               <CalendarDays size={14} /> {dateRange(trip)}
             </span>
@@ -198,7 +204,6 @@ const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null
           </p>
         </div>
       </div>
-
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_380px] lg:gap-12">
         {/* Itinerary */}
         <div className="min-w-0">
