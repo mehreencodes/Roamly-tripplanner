@@ -1,6 +1,6 @@
 import { auth } from '@/lib/firebase'
 import type { TripBudget } from '@/types/budget'
-import type { Trip } from '@/types/trip'
+import type { Activity, Trip } from '@/types/trip'
 
 const BASE = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '')
 
@@ -57,3 +57,34 @@ export const putTrip = (payload: { id: string }) =>
   request<void>(`/api/trips/${payload.id}`, { method: 'PUT', body: JSON.stringify(payload) })
 
 export const deleteTrip = (id: string) => request<void>(`/api/trips/${id}`, { method: 'DELETE' })
+export const getShare = (id: string) => request<{ token: string | null }>(`/api/trips/${id}/share`)
+export const createShare = (id: string) =>
+  request<{ token: string }>(`/api/trips/${id}/share`, { method: 'POST' })
+export const removeShare = (id: string) =>
+  request<void>(`/api/trips/${id}/share`, { method: 'DELETE' })
+
+/** Public link se aane wali trip: budget aur uid is mein nahi hote */
+export interface SharedTrip {
+  destinationSlug: string
+  title: string
+  startDate: string
+  days: Activity[][]
+  createdAt: number
+}
+
+/** Login ke baghair. Soya hua server ho to 70 second tak intezar */
+export async function fetchSharedTrip(token: string): Promise<SharedTrip> {
+  if (!BASE) throw new ApiError(0, 'API is not configured')
+
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), 70_000)
+  try {
+    const res = await fetch(`${BASE}/api/share/${encodeURIComponent(token)}`, {
+      signal: controller.signal,
+    })
+    if (!res.ok) throw new ApiError(res.status, 'This link is not available')
+    return (await res.json()) as SharedTrip
+  } finally {
+    clearTimeout(timer)
+  }
+}

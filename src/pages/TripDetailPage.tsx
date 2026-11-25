@@ -36,6 +36,7 @@ import { tripReadiness } from '@/features/trips/readiness'
 import { useBudget } from '@/features/budget/budgetStore'
 import CustomActivityForm from '@/features/trips/CustomActivityForm'    
       import TripMap from '@/features/trips/TripMap' 
+      import ShareButton from '@/features/trips/ShareButton'
 
 /* "Day at a glance": 06:00 se 22:00 tak ki patti, overlap saaf nazar aata hai */
 const VIEW_START = 6 * 60
@@ -211,36 +212,40 @@ const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null
         <div className="min-w-0">
 
 {/* Itinerary / Map tabs */}
-<div role="tablist" aria-label="Trip view" className="mb-5 flex gap-2">
-  <button
-    type="button"
-    role="tab"
-    aria-selected={activeView === 'itinerary'}
-    onClick={() => setActiveView('itinerary')}
-    className={`rounded-full px-5 py-2.5 text-sm font-medium transition ${
-      activeView === 'itinerary'
-        ? 'bg-forest text-white'
-        : 'border border-sand bg-white text-forest hover:border-forest/40'
-    }`}
-  >
-    Itinerary
-  </button>
+<div className="mb-5 flex items-center justify-between gap-2">
+  <div role="tablist" aria-label="Trip view" className="flex gap-2">
+    <button
+      type="button"
+      role="tab"
+      aria-selected={activeView === 'itinerary'}
+      onClick={() => setActiveView('itinerary')}
+      className={`rounded-full px-5 py-2.5 text-sm font-medium transition ${
+        activeView === 'itinerary'
+          ? 'bg-forest text-white'
+          : 'border border-sand bg-white text-forest hover:border-forest/40'
+      }`}
+    >
+      Itinerary
+    </button>
 
-  <button
-    type="button"
-    role="tab"
-    aria-selected={activeView === 'map'}
-    onClick={() => setActiveView('map')}
-    className={`rounded-full px-5 py-2.5 text-sm font-medium transition ${
-      activeView === 'map'
-        ? 'bg-forest text-white'
-        : 'border border-sand bg-white text-forest hover:border-forest/40'
-    }`}
-  >
-    <span className="inline-flex items-center gap-1.5">
-      <MapPin size={15} /> Map
-    </span>
-  </button>
+    <button
+      type="button"
+      role="tab"
+      aria-selected={activeView === 'map'}
+      onClick={() => setActiveView('map')}
+      className={`rounded-full px-5 py-2.5 text-sm font-medium transition ${
+        activeView === 'map'
+          ? 'bg-forest text-white'
+          : 'border border-sand bg-white text-forest hover:border-forest/40'
+      }`}
+    >
+      <span className="inline-flex items-center gap-1.5">
+        <MapPin size={15} /> Map
+      </span>
+    </button>
+  </div>
+
+  <ShareButton key={trip.id} tripId={trip.id} />
 </div>
 
           {/* Day tabs */}

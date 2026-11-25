@@ -19,6 +19,7 @@ const TripsPage = lazy(() => import('@/pages/TripsPage'))
 const TripPlannerPage = lazy(() => import('@/pages/TripPlannerPage'))
 const TripDetailPage = lazy(() => import('@/pages/TripDetailPage'))
 const TripBudgetPage = lazy(() => import('@/pages/TripBudgetPage'))
+const SharedTripPage = lazy(() => import('@/pages/SharedTripPage'))
 
 /** Har page: error aaye to navbar ke saath saaf screen, aur load hote waqt spinner */
 const page = (node: ReactNode) => (
@@ -36,6 +37,7 @@ export default function App() {
             {/* Bina navbar wale pages */}
             <Route path="/auth" element={page(<AuthPage />)} />
             <Route path="/welcome" element={page(<WelcomePage />)} />
+            <Route path="/share/:token" element={page(<SharedTripPage />)} />
 
             {/* Navbar wale pages */}
             <Route element={<Layout />}>

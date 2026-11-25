@@ -3,6 +3,7 @@ import express, { type NextFunction, type Request, type Response } from 'express
 import helmet from 'helmet'
 import { config } from './config.js'
 import { tripsRouter } from './routes/trips.js'
+import { shareRouter } from './routes/share.js'
 
 export function createApp() {
   const app = express()
@@ -26,6 +27,7 @@ export function createApp() {
     res.json({ ok: true })
   })
   app.use('/api/trips', tripsRouter)
+    app.use('/api/share', shareRouter)
 
   app.use((_req, res) => {
     res.status(404).json({ error: 'Not found' })
