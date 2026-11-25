@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import { findDestination } from '@/features/trips/tripUtils'
 import usePageTitle from '@/lib/usePageTitle'
 import Footer from './Footer'
+import SyncStatus from '@/features/sync/SyncStatus'
 
 const SITE = 'Roamly'
 
@@ -40,6 +41,7 @@ export default function Layout() {
         <Outlet />
       </main>
        <Footer />
+        <SyncStatus />
     </div>
   )
 }

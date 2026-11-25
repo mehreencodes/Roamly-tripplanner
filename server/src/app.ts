@@ -7,8 +7,19 @@ import { tripsRouter } from './routes/trips.js'
 export function createApp() {
   const app = express()
 
-  app.use(helmet())
-  app.use(cors({ origin: config.corsOrigins }))
+  app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }))
+  app.use(
+    cors({
+      origin(origin, callback) {
+        // Bina Origin wali requests (curl, server-to-server) aur dev ka koi bhi localhost port
+        const allowed =
+          !origin ||
+          config.corsOrigins.includes(origin) ||
+          /^http:\/\/localhost:\d+$/.test(origin)
+        callback(null, allowed)
+      },
+    }),
+  )
   app.use(express.json({ limit: '256kb' }))
 
   app.get('/api/health', (_req, res) => {

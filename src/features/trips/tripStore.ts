@@ -96,6 +96,12 @@ function subscribe(listener: () => void) {
 }
 
 const getSnapshot = () => trips
+/** Sync engine ke liye */
+export const getAllTrips = () => trips
+export const subscribeTrips = subscribe
+export function replaceUserTrips(uid: string, next: Trip[]) {
+  commit([...next, ...trips.filter((t) => t.uid !== uid)])
+}
 
 /** Sirf current logged-in user ki trips */
 export function useTrips() {

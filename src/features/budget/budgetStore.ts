@@ -46,6 +46,12 @@ function subscribe(listener: () => void) {
 }
 
 const getSnapshot = () => budgets
+/** Sync engine ke liye */
+export const getAllBudgets = () => budgets
+export const subscribeBudgets = subscribe
+export function mergeBudgets(entries: BudgetMap) {
+  commit({ ...budgets, ...entries })
+}
 
 /** Trip ka budget. Abhi set nahi hua to null */
 export function useBudget(tripId: string | undefined): TripBudget | null {

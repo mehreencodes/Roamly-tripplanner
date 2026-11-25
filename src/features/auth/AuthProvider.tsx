@@ -11,6 +11,7 @@ import {
 } from 'firebase/auth'
 import { auth, googleProvider } from '@/lib/firebase'
 import { AuthContext, type AuthContextValue } from './authContext'
+import { startSync, stopSync } from '@/features/sync/syncEngine'
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
@@ -23,7 +24,13 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false)
     })
   }, [])
-
+  const uid = user?.uid
+  useEffect(() => {
+    if (!uid) return
+    startSync(uid)
+    return () => stopSync()
+  }, [uid])
+  
   const value: AuthContextValue = {
     user,
     loading,
