@@ -13,6 +13,9 @@ dist-ssr
 image-originals
 *.local
 
+.env
+server/.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
