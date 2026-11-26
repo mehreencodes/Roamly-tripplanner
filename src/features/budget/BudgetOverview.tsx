@@ -12,7 +12,6 @@ import type { BudgetStatus, BudgetSummary } from './budgetMath'
 import { categoryMeta } from './categoryMeta'
 
 /* ------------------------- Budget set/edit karne ka form ------------------------- */
-
 interface BudgetSetupFormProps {
   initialCurrency: CurrencyCode
   initialTotalMinor: number | null
@@ -145,9 +144,13 @@ const pct = (part: number, whole: number) =>
 
 function Stat({ label, value, bad = false }: { label: string; value: string; bad?: boolean }) {
   return (
-    <div>
+    <div className="flex min-w-0 items-baseline justify-between gap-3 sm:block">
       <dt className="text-xs uppercase tracking-widest text-muted">{label}</dt>
-      <dd className={`mt-1 font-display text-xl sm:text-2xl ${bad ? 'text-red-600' : 'text-forest'}`}>
+      <dd
+        className={`min-w-0 break-words text-right font-display text-xl sm:mt-1 sm:text-left sm:text-2xl ${
+          bad ? 'text-red-600' : 'text-forest'
+        }`}
+      >
         {value}
       </dd>
     </div>
@@ -196,10 +199,10 @@ export default function BudgetOverview({
           />
         ) : (
           <>
-            <div className="flex items-start justify-between gap-4">
-              <div>
+            <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-3">
+              <div className="min-w-0">
                 <p className="text-xs uppercase tracking-widest text-muted">Trip budget</p>
-                <p className="mt-1 font-display text-4xl text-forest">
+                <p className="mt-1 break-words font-display text-3xl text-forest sm:text-4xl">
                   {total === null ? 'Not set' : formatMoney(total, currency)}
                 </p>
               </div>
@@ -252,7 +255,7 @@ export default function BudgetOverview({
               </p>
             )}
 
-            <dl className="mt-6 grid grid-cols-3 gap-3 border-t border-sand pt-5">
+            <dl className="mt-6 grid grid-cols-1 gap-3 border-t border-sand pt-5 sm:grid-cols-3">
               <Stat label="Spent so far" value={formatMoney(summary.spentMinor, currency)} />
               <Stat label="Still planned" value={formatMoney(summary.plannedMinor, currency)} />
               <Stat
@@ -287,10 +290,10 @@ export default function BudgetOverview({
               return (
                 <li key={c.category}>
                   <div className="flex items-center justify-between gap-3 text-sm">
-                    <span className="flex items-center gap-2 font-medium text-forest">
-                      <Icon size={16} className="text-terracotta" /> {label}
+                    <span className="flex min-w-0 items-center gap-2 font-medium text-forest">
+                      <Icon size={16} className="shrink-0 text-terracotta" /> {label}
                     </span>
-                    <span className="tabular-nums text-ink">
+                    <span className="shrink-0 tabular-nums text-ink">
                       {formatMoney(c.projectedMinor, currency)}
                       <span className="ml-2 text-xs text-muted">{Math.round(share)}%</span>
                     </span>
