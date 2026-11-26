@@ -11,7 +11,6 @@ const parsed = z
   .safeParse(process.env)
 
 if (!parsed.success) {
-  // Sirf naam batate hain, values kabhi nahi
   console.error(
     'Missing or invalid environment variables:',
     parsed.error.issues.map((i) => i.path.join('.')).join(', '),

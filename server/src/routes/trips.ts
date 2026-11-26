@@ -56,7 +56,7 @@ tripsRouter.put(
       return
     }
 
-    // Jo optional fields is baar nahi aaye, unhe hata do
+    // Jo optional fields is baar nahi aaye,
     const unset: Record<string, ''> = {}
     if (rest.budget === undefined) unset.budget = ''
     if (rest.dismissedIssues === undefined) unset.dismissedIssues = ''
@@ -106,7 +106,7 @@ tripsRouter.get(
   }),
 )
 
-/** Link banana. Pehle se ho to wohi wapas */
+/** Link banana */
 tripsRouter.post(
   '/:id/share',
   wrap(async (req, res) => {
@@ -134,7 +134,7 @@ tripsRouter.post(
   }),
 )
 
-/** Link band karna */
+/** Link band */
 tripsRouter.delete(
   '/:id/share',
   wrap(async (req, res) => {

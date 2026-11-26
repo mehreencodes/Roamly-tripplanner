@@ -3,9 +3,9 @@ import path from 'node:path'
 import sharp from 'sharp'
 
 const SRC = 'public/images'
-const BACKUP = 'image-originals' // originals yahan jate hain, public se bahar
-const SKIP = /(favicon|logo|icon)/i // logo aur icons ko mat chhero
-const WIDTHS = { hero: 1920 } // folder ke hisaab se max width
+const BACKUP = 'image-originals' 
+const SKIP = /(favicon|logo|icon)/i 
+const WIDTHS = { hero: 1920 } 
 const DEFAULT_WIDTH = 1400
 const QUALITY = 78
 

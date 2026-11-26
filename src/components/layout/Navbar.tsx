@@ -103,10 +103,7 @@ export default function Navbar() {
                 Sign in
               </Link>
             )}
-            {/* <Link
-              to="/explore"
-              className="group flex items-center gap-1.5 rounded-full bg-terracotta px-5 py-2.5 text-sm font-medium text-white transition hover:bg-terracotta/90 active:scale-95"
-            > */}
+            
             <Link
   to="/trips/new"
   className="group flex items-center gap-1.5 rounded-full bg-terracotta px-5 py-2.5 text-sm font-medium text-white transition hover:bg-terracotta/90 active:scale-95"

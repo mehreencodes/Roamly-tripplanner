@@ -30,7 +30,7 @@ export function toTrip(doc: TripDoc) {
   return { id: _id, ...rest }
 }
 
-/** Public link ke liye: sirf yeh fields, uid aur budget kabhi nahi */
+/** Public link ke liye: sirf yeh fields*/
 export function toPublicTrip(doc: TripDoc) {
   return {
     destinationSlug: doc.destinationSlug,

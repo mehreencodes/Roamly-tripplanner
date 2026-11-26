@@ -4,7 +4,7 @@ import { RefreshCw, TriangleAlert } from 'lucide-react'
 
 interface Props {
   children: ReactNode
-  /** Yeh badle to error saaf ho jata hai (jaise doosre page par jana) */
+  /** Yeh badle to error saaf ho jata hai  */
   resetKey?: string
 }
 
@@ -12,7 +12,6 @@ interface State {
   error: Error | null
 }
 
-/** Naye deploy ke baad purani chunk file na milne ka error */
 const isStaleChunk = (error: Error) =>
   /dynamically imported module|Importing a module script failed|Failed to fetch/i.test(
     error.message,
