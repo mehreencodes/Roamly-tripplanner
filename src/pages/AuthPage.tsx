@@ -62,7 +62,7 @@ usePageTitle(mode === 'signup' ? 'Create your account · Roamly' : 'Sign in · R
       </aside>
 
       {/* Right: form */}
-      <div className="flex flex-col px-6 py-8 sm:px-12">
+      <main className="flex flex-col px-6 py-8 sm:px-12">     
         <Link to="/" aria-label="Roamly home" className="w-fit">
           <Logo />
         </Link>
@@ -83,7 +83,7 @@ usePageTitle(mode === 'signup' ? 'Create your account · Roamly' : 'Sign in · R
             onModeChange={(m) => setParams(m === 'signup' ? { mode: 'signup' } : {})}
           />
         </div>
-      </div>
+      </main>
     </div>
   )
 }
